@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apps SDK UI - Vanilla Web Components</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin-top: 0;
+    }
+    .demo-section {
+      margin-bottom: 2rem;
+    }
+    .demo-section h2 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .code {
+      background: #f8f8f8;
+      padding: 1rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      overflow-x: auto;
+      margin-top: 0.5rem;
+    }
+    .info {
+      background: #e3f2fd;
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎨 Apps SDK UI - Vanilla Web Components</h1>
+    <div class="info">
+      <strong>Zero Dependency Web Components</strong><br>
+      Uses <code>adoptedStyleSheets</code> for efficient style sharing across shadow DOM.
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="demo-section">
+      <h2>Button Variants</h2>
+      <div class="demo-grid">
+        <apps-button variant="solid" color="primary">Solid Primary</apps-button>
+        <apps-button variant="soft" color="primary">Soft Primary</apps-button>
+        <apps-button variant="outline" color="primary">Outline Primary</apps-button>
+        <apps-button variant="ghost" color="primary">Ghost Primary</apps-button>
+      </div>
+      <div class="code">
+&lt;apps-button variant="solid" color="primary"&gt;Solid Primary&lt;/apps-button&gt;
+&lt;apps-button variant="soft" color="primary"&gt;Soft Primary&lt;/apps-button&gt;
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Button Colors</h2>
+      <div class="demo-grid">
+        <apps-button color="primary">Primary</apps-button>
+        <apps-button color="secondary">Secondary</apps-button>
+        <apps-button color="success">Success</apps-button>
+        <apps-button color="danger">Danger</apps-button>
+        <apps-button color="warning">Warning</apps-button>
+        <apps-button color="info">Info</apps-button>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Button Sizes</h2>
+      <div class="demo-grid">
+        <apps-button size="xs">Extra Small</apps-button>
+        <apps-button size="sm">Small</apps-button>
+        <apps-button size="md">Medium</apps-button>
+        <apps-button size="lg">Large</apps-button>
+        <apps-button size="xl">Extra Large</apps-button>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Button States</h2>
+      <div class="demo-grid">
+        <apps-button>Normal</apps-button>
+        <apps-button disabled>Disabled</apps-button>
+        <apps-button loading>Loading</apps-button>
+        <apps-button pill>Pill Shape</apps-button>
+        <apps-button block>Block Button</apps-button>
+      </div>
+      <div class="code">
+&lt;apps-button disabled&gt;Disabled&lt;/apps-button&gt;
+&lt;apps-button loading&gt;Loading&lt;/apps-button&gt;
+&lt;apps-button pill&gt;Pill Shape&lt;/apps-button&gt;
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>JavaScript API</h2>
+      <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+        <apps-button id="testButton" color="primary">Test Button</apps-button>
+        <button onclick="toggleDisabled()">Toggle Disabled</button>
+        <button onclick="toggleLoading()">Toggle Loading</button>
+        <button onclick="changeColor()">Change Color</button>
+      </div>
+      <div id="output" style="padding: 1rem; background: #f8f8f8; border-radius: 4px; min-height: 3rem;">
+        Click events will appear here...
+      </div>
+      <div class="code">
+const button = document.querySelector('#testButton');
+button.addEventListener('apps-click', (e) => {
+  console.log('Button clicked!', e.detail);
+});
+
+// Toggle properties
+button.disabled = !button.disabled;
+button.loading = !button.loading;
+button.color = 'success';
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Browser Support</h2>
+    <ul>
+      <li><strong>Custom Elements</strong>: ✅ All modern browsers</li>
+      <li><strong>Shadow DOM</strong>: ✅ All modern browsers</li>
+      <li><strong>adoptedStyleSheets</strong>: ✅ Chrome 73+, Firefox 101+, Safari 16.4+</li>
+    </ul>
+    <p>For older browsers, consider using polyfills or fallback to light DOM.</p>
+  </div>
+
+  <!-- Load the web components library -->
+  <!-- In production, this would be: -->
+  <!-- <script src="../../dist/vanilla/apps-sdk-ui.js"></script> -->
+  <!-- For now, we'll use a module import -->
+  <script type="module">
+    // Import the library (will auto-initialize)
+    import { initialize, AppsButton } from '../../src/vanilla/index.ts';
+
+    // Initialize with inline Tailwind CSS (for demo purposes)
+    // In production, this would be bundled
+    const tailwindCDN = document.createElement('script');
+    tailwindCDN.src = 'https://cdn.tailwindcss.com';
+    document.head.appendChild(tailwindCDN);
+
+    // Wait for Tailwind to load, then initialize
+    tailwindCDN.onload = () => {
+      console.log('Tailwind loaded');
+      // For demo, we'll let it auto-initialize
+    };
+
+    // Add event listeners to all buttons
+    document.querySelectorAll('apps-button').forEach(button => {
+      button.addEventListener('apps-click', (e) => {
+        const output = document.getElementById('output');
+        const time = new Date().toLocaleTimeString();
+        output.innerHTML = `[${time}] Button clicked: ${e.target.textContent}<br>` + output.innerHTML;
+      });
+    });
+
+    // JavaScript API demo functions
+    window.toggleDisabled = () => {
+      const button = document.getElementById('testButton');
+      button.disabled = !button.disabled;
+    };
+
+    window.toggleLoading = () => {
+      const button = document.getElementById('testButton');
+      button.loading = !button.loading;
+    };
+
+    let colorIndex = 0;
+    window.changeColor = () => {
+      const colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info'];
+      const button = document.getElementById('testButton');
+      colorIndex = (colorIndex + 1) % colors.length;
+      button.color = colors[colorIndex];
+    };
+
+    console.log('Apps SDK UI Vanilla Demo Ready!');
+    console.log('Available components:', { AppsButton });
+  </script>
+</body>
+</html>

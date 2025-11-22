@@ -14,7 +14,8 @@
   "private": false,
   "files": [
     "dist/es/**",
-    "dist/types/**"
+    "dist/types/**",
+    "dist/vanilla/**"
   ],
   "exports": {
     "./css": "./dist/es/styles/index.css",
@@ -41,7 +42,14 @@
     "./dateUtils": {
       "types": "./dist/types/lib/dateUtils.d.ts",
       "default": "./dist/es/lib/dateUtils.js"
-    }
+    },
+    "./vanilla": {
+      "types": "./dist/vanilla/index.d.ts",
+      "import": "./dist/vanilla/apps-sdk-ui.esm.js",
+      "require": "./dist/vanilla/apps-sdk-ui.js",
+      "default": "./dist/vanilla/apps-sdk-ui.js"
+    },
+    "./vanilla/css": "./dist/vanilla/apps-sdk-ui.css"
   },
   "scripts": {
     "format": "prettier --check --cache --ignore-path .gitignore --ignore-path .prettierignore '**/*.{js,jsx,ts,tsx,json,css,md}'",
@@ -56,6 +64,7 @@
     "build:css": "node ./scripts/build-css.mjs",
     "build:assets": "rsync -a --include='*/' --include='*.d.ts' --exclude='*' src/ dist/types/",
     "build": "npm run build:clean && npm run build:js && npm run build:css && npm run build:assets",
+    "build:vanilla": "rollup -c rollup.config.vanilla.mjs",
     "prepublishOnly": "npm run format:fix && npm run lint && npm run types && npm run test && npm run build",
     "storybook": "storybook dev -p 6006 --config-dir .storybook-base",
     "build-storybook": "storybook build --disable-telemetry --config-dir .storybook-base"
@@ -144,6 +153,10 @@
     "react-router": "^7.1.5",
     "rollup": "4.35.0",
     "rollup-plugin-dts": "6.2.3",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "rollup-plugin-postcss": "^4.0.2",
     "storybook": "^8.6.12",
     "stylelint": "16.18.0",
     "stylelint-config-standard": "^37.0.0",
