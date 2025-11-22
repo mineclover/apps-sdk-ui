@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Vanilla Test</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 style="margin-bottom: 2rem;">🧪 Vanilla Web Components Test</h1>
+
+    <div id="status" style="padding: 1rem; background: #e3f2fd; border-radius: 4px; margin-bottom: 2rem;">
+      Loading...
+    </div>
+
+    <h2 style="margin-bottom: 1rem;">Test Buttons:</h2>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+      <apps-button color="primary" variant="solid">Primary</apps-button>
+      <apps-button color="success" variant="soft">Success</apps-button>
+      <apps-button color="danger" variant="outline">Danger</apps-button>
+      <apps-button color="info" variant="ghost">Info</apps-button>
+    </div>
+
+    <h2 style="margin-bottom: 1rem;">Interactive Test:</h2>
+    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+      <button onclick="test()" style="padding: 0.5rem 1rem; border: 1px solid #ccc; border-radius: 4px; background: white; cursor: pointer;">
+        Run Test
+      </button>
+    </div>
+    <apps-button id="testBtn" color="primary">Test Button</apps-button>
+
+    <div id="output" style="margin-top: 1rem; padding: 1rem; background: #f8f8f8; border-radius: 4px; font-family: monospace; font-size: 0.9rem; min-height: 100px;">
+      Console output will appear here...
+    </div>
+  </div>
+
+  <script src="dist/vanilla/apps-sdk-ui.js"></script>
+
+  <script>
+    const output = document.getElementById('output');
+    const status = document.getElementById('status');
+
+    function log(msg) {
+      const time = new Date().toLocaleTimeString();
+      output.innerHTML += `[${time}] ${msg}<br>`;
+      console.log(msg);
+    }
+
+    function test() {
+      log('--- Running Tests ---');
+
+      // Test 1: Check if AppsSDKUI loaded
+      if (typeof AppsSDKUI !== 'undefined') {
+        log('✓ AppsSDKUI loaded');
+        log(`  Exports: ${Object.keys(AppsSDKUI).join(', ')}`);
+      } else {
+        log('✗ AppsSDKUI not loaded');
+        return;
+      }
+
+      // Test 2: Check StyleManager
+      if (AppsSDKUI.StyleManager) {
+        log('✓ StyleManager found');
+        log(`  Ready: ${AppsSDKUI.StyleManager.isReady()}`);
+      } else {
+        log('✗ StyleManager not found');
+      }
+
+      // Test 3: Check custom element
+      const isRegistered = customElements.get('apps-button');
+      if (isRegistered) {
+        log('✓ apps-button registered');
+      } else {
+        log('✗ apps-button not registered');
+      }
+
+      // Test 4: Check shadow DOM
+      const btn = document.getElementById('testBtn');
+      if (btn && btn.shadowRoot) {
+        log('✓ Shadow DOM found');
+        log(`  Mode: ${btn.shadowRoot.mode}`);
+        log(`  Adopted sheets: ${btn.shadowRoot.adoptedStyleSheets?.length || 0}`);
+      } else {
+        log('✗ Shadow DOM not found');
+      }
+
+      // Test 5: Test API
+      try {
+        const originalColor = btn.color;
+        log(`  Current color: ${originalColor}`);
+
+        btn.color = 'success';
+        log(`  Changed to: ${btn.color}`);
+
+        setTimeout(() => {
+          btn.color = 'danger';
+          log(`  Changed to: ${btn.color}`);
+
+          setTimeout(() => {
+            btn.color = originalColor;
+            log(`  Restored to: ${btn.color}`);
+          }, 500);
+        }, 500);
+
+        log('✓ JavaScript API working');
+      } catch (e) {
+        log('✗ API error: ' + e.message);
+      }
+
+      // Test 6: Events
+      btn.addEventListener('apps-click', (e) => {
+        log('✓ apps-click event received!');
+      }, { once: true });
+
+      setTimeout(() => {
+        btn.click();
+      }, 2000);
+    }
+
+    // Auto-run on load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        // Check browser support
+        const support = {
+          customElements: typeof customElements !== 'undefined',
+          shadowDOM: typeof HTMLElement.prototype.attachShadow === 'function',
+          adoptedStyleSheets: typeof CSSStyleSheet.prototype.replace === 'function'
+        };
+
+        const supported = Object.values(support).every(v => v);
+
+        if (supported) {
+          status.innerHTML = '✅ Browser supports all required APIs<br>' +
+            '<small>Custom Elements, Shadow DOM, adoptedStyleSheets</small>';
+          status.style.background = '#d4edda';
+          status.style.color = '#155724';
+
+          log('Browser support: OK');
+          log('Ready to test!');
+        } else {
+          status.innerHTML = '⚠️ Browser missing required APIs<br>' +
+            '<small>' + Object.entries(support).filter(([_, v]) => !v).map(([k]) => k).join(', ') + '</small>';
+          status.style.background = '#fff3cd';
+          status.style.color = '#856404';
+
+          log('Browser support: PARTIAL');
+        }
+
+        // Auto-test
+        setTimeout(test, 500);
+      }, 200);
+    });
+  </script>
+</body>
+</html>

@@ -90,9 +90,9 @@ export abstract class BaseElement extends HTMLElement {
    * Hook called when attribute changes (override in subclasses)
    */
   protected onAttributeChange(
-    name: string,
-    oldValue: string | null,
-    newValue: string | null,
+    _name: string,
+    _oldValue: string | null,
+    _newValue: string | null,
   ): void {
     // Override in subclasses
   }

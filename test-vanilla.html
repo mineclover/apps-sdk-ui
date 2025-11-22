@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanilla Web Components - Simple Test</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+    .test-section {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: #f9f9f9;
+      border-radius: 4px;
+    }
+    .test-section h2 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #666;
+    }
+    .status {
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .status.info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+    code {
+      background: #e9ecef;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+    .output {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      min-height: 3rem;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    .test-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧪 Vanilla Web Components - Verification Test</h1>
+
+    <div id="browserSupport" class="status info">
+      Checking browser support...
+    </div>
+
+    <div class="test-section">
+      <h2>Test 1: Script Loading</h2>
+      <div id="scriptTest" class="status info">Waiting...</div>
+    </div>
+
+    <div class="test-section">
+      <h2>Test 2: StyleManager Initialization</h2>
+      <div id="styleTest" class="status info">Waiting...</div>
+    </div>
+
+    <div class="test-section">
+      <h2>Test 3: Custom Element Registration</h2>
+      <div id="elementTest" class="status info">Waiting...</div>
+    </div>
+
+    <div class="test-section">
+      <h2>Test 4: Button Component Render</h2>
+      <div id="renderTest" class="status info">Waiting...</div>
+      <div class="test-buttons">
+        <apps-button id="testButton1" color="primary" variant="solid">Primary Button</apps-button>
+        <apps-button id="testButton2" color="success" variant="soft">Success Soft</apps-button>
+        <apps-button id="testButton3" color="danger" variant="outline">Danger Outline</apps-button>
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>Test 5: JavaScript API</h2>
+      <div id="apiTest" class="status info">Waiting...</div>
+      <div style="margin-top: 1rem;">
+        <button onclick="testDisable()">Toggle Disabled</button>
+        <button onclick="testLoading()">Toggle Loading</button>
+        <button onclick="testColor()">Change Color</button>
+        <button onclick="testSize()">Change Size</button>
+      </div>
+      <apps-button id="apiTestButton" color="primary">API Test Button</apps-button>
+    </div>
+
+    <div class="test-section">
+      <h2>Test 6: Event Handling</h2>
+      <div id="eventTest" class="status info">Waiting...</div>
+      <apps-button id="eventTestButton" color="info">Click Me!</apps-button>
+      <div id="eventOutput" class="output">No events yet...</div>
+    </div>
+
+    <div class="test-section">
+      <h2>Test 7: Shadow DOM & adoptedStyleSheets</h2>
+      <div id="shadowTest" class="status info">Waiting...</div>
+      <div id="shadowOutput" class="output"></div>
+    </div>
+  </div>
+
+  <!-- Load the vanilla bundle -->
+  <script src="../../dist/vanilla/apps-sdk-ui.js"></script>
+
+  <script>
+    // Test Suite
+    let testResults = {
+      script: false,
+      style: false,
+      element: false,
+      render: false,
+      api: false,
+      event: false,
+      shadow: false
+    };
+
+    function updateStatus(id, success, message) {
+      const el = document.getElementById(id);
+      el.className = 'status ' + (success ? 'success' : 'error');
+      el.textContent = (success ? '✓ ' : '✗ ') + message;
+      return success;
+    }
+
+    function runTests() {
+      console.log('🧪 Starting verification tests...');
+
+      // Test 1: Script Loading
+      testResults.script = updateStatus(
+        'scriptTest',
+        typeof AppsSDKUI !== 'undefined',
+        typeof AppsSDKUI !== 'undefined'
+          ? 'AppsSDKUI loaded successfully'
+          : 'AppsSDKUI not found'
+      );
+
+      if (!testResults.script) {
+        console.error('Script loading failed - stopping tests');
+        return;
+      }
+
+      // Test 2: StyleManager
+      testResults.style = updateStatus(
+        'styleTest',
+        AppsSDKUI.StyleManager && typeof AppsSDKUI.StyleManager.isReady === 'function',
+        AppsSDKUI.StyleManager
+          ? `StyleManager available, ready: ${AppsSDKUI.StyleManager.isReady()}`
+          : 'StyleManager not found'
+      );
+
+      // Test 3: Custom Element Registration
+      const isRegistered = customElements.get('apps-button') !== undefined;
+      testResults.element = updateStatus(
+        'elementTest',
+        isRegistered,
+        isRegistered
+          ? 'apps-button custom element registered'
+          : 'apps-button not registered'
+      );
+
+      // Test 4: Render
+      setTimeout(() => {
+        const button1 = document.getElementById('testButton1');
+        const hasShadow = button1 && button1.shadowRoot !== null;
+        testResults.render = updateStatus(
+          'renderTest',
+          hasShadow,
+          hasShadow
+            ? 'Buttons rendered with shadow DOM'
+            : 'Shadow DOM not found'
+        );
+
+        // Test 7: Shadow DOM details
+        if (hasShadow) {
+          const adoptedSheets = button1.shadowRoot.adoptedStyleSheets;
+          const hasAdoptedSheets = adoptedSheets && adoptedSheets.length > 0;
+
+          testResults.shadow = updateStatus(
+            'shadowTest',
+            hasAdoptedSheets,
+            hasAdoptedSheets
+              ? `adoptedStyleSheets working! (${adoptedSheets.length} sheet${adoptedSheets.length > 1 ? 's' : ''})`
+              : 'adoptedStyleSheets not found'
+          );
+
+          document.getElementById('shadowOutput').innerHTML = `
+<strong>Shadow DOM Details:</strong><br>
+- Mode: ${button1.shadowRoot.mode}<br>
+- Adopted Stylesheets: ${adoptedSheets.length}<br>
+- Child nodes: ${button1.shadowRoot.childNodes.length}<br>
+- First child tag: ${button1.shadowRoot.firstElementChild?.tagName || 'none'}
+          `;
+        }
+      }, 100);
+
+      // Test 5: JavaScript API
+      setTimeout(() => {
+        const apiButton = document.getElementById('apiTestButton');
+        try {
+          const originalColor = apiButton.color;
+          apiButton.color = 'success';
+          const colorChanged = apiButton.color === 'success';
+          apiButton.color = originalColor;
+
+          testResults.api = updateStatus(
+            'apiTest',
+            colorChanged,
+            colorChanged
+              ? 'JavaScript property API working'
+              : 'Property API failed'
+          );
+        } catch (e) {
+          updateStatus('apiTest', false, 'API error: ' + e.message);
+        }
+      }, 150);
+
+      // Test 6: Events
+      const eventButton = document.getElementById('eventTestButton');
+      let eventReceived = false;
+
+      eventButton.addEventListener('apps-click', (e) => {
+        eventReceived = true;
+        const time = new Date().toLocaleTimeString();
+        document.getElementById('eventOutput').innerHTML += `[${time}] apps-click event received!<br>`;
+
+        if (!testResults.event) {
+          testResults.event = updateStatus('eventTest', true, 'Event system working');
+        }
+      });
+
+      // Auto-click to test events
+      setTimeout(() => {
+        eventButton.click();
+        setTimeout(() => {
+          if (!eventReceived) {
+            updateStatus('eventTest', false, 'No events received');
+          }
+        }, 100);
+      }, 200);
+
+      // Browser Support Check
+      const supportedAPIs = {
+        customElements: typeof customElements !== 'undefined',
+        shadowDOM: typeof HTMLElement.prototype.attachShadow === 'function',
+        adoptedStyleSheets: typeof CSSStyleSheet.prototype.replace === 'function'
+      };
+
+      const allSupported = Object.values(supportedAPIs).every(v => v);
+      updateStatus(
+        'browserSupport',
+        allSupported,
+        allSupported
+          ? 'Browser fully supports all required APIs'
+          : 'Browser missing: ' + Object.entries(supportedAPIs)
+              .filter(([_, v]) => !v)
+              .map(([k, _]) => k)
+              .join(', ')
+      );
+
+      // Summary
+      setTimeout(() => {
+        const passed = Object.values(testResults).filter(v => v).length;
+        const total = Object.keys(testResults).length;
+        console.log(`\n✅ Tests Complete: ${passed}/${total} passed`);
+        console.log('Results:', testResults);
+      }, 500);
+    }
+
+    // Interactive test functions
+    window.testDisable = () => {
+      const btn = document.getElementById('apiTestButton');
+      btn.disabled = !btn.disabled;
+      console.log('Disabled:', btn.disabled);
+    };
+
+    window.testLoading = () => {
+      const btn = document.getElementById('apiTestButton');
+      btn.loading = !btn.loading;
+      console.log('Loading:', btn.loading);
+    };
+
+    let colorIndex = 0;
+    window.testColor = () => {
+      const colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info'];
+      const btn = document.getElementById('apiTestButton');
+      colorIndex = (colorIndex + 1) % colors.length;
+      btn.color = colors[colorIndex];
+      console.log('Color:', btn.color);
+    };
+
+    let sizeIndex = 0;
+    window.testSize = () => {
+      const sizes = ['xs', 'sm', 'md', 'lg', 'xl'];
+      const btn = document.getElementById('apiTestButton');
+      sizeIndex = (sizeIndex + 1) % sizes.length;
+      btn.size = sizes[sizeIndex];
+      console.log('Size:', btn.size);
+    };
+
+    // Run tests when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', runTests);
+    } else {
+      runTests();
+    }
+  </script>
+</body>
+</html>
