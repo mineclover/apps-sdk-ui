@@ -4,19 +4,20 @@
  * The CSS will be bundled as a string and injected into adoptedStyleSheets
  */
 
-// This will be replaced by the bundler with actual CSS content
-// For now, we'll use a placeholder that can be replaced during build
-export const GLOBAL_STYLES = `
-/* Placeholder for bundled Tailwind + component styles */
-/* This will be replaced by rollup-plugin-postcss or a custom plugin */
-`;
+// Import CSS as a string using the ?inline query parameter
+// This will be processed by rollup-plugin-css-string
+// @ts-ignore - Dynamic import handled by bundler
+import vanillaCSS from './vanilla.css?inline';
+
+import { StyleManager } from './StyleManager';
+
+export const GLOBAL_STYLES = vanillaCSS || '';
 
 /**
  * Initialize styles
  * This should be called before any components are used
  */
 export function initializeStyles(cssContent?: string): void {
-  const { StyleManager } = require('./StyleManager');
   const styles = cssContent || GLOBAL_STYLES;
 
   if (styles && styles.trim() !== '') {

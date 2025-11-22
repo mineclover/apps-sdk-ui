@@ -1,9 +1,9 @@
 import typescript from '@rollup/plugin-typescript';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import postcss from 'rollup-plugin-postcss';
-import { readFileSync, readdirSync, existsSync } from 'fs';
+import { readdirSync, existsSync } from 'fs';
 import { join } from 'path';
+import cssString from './rollup-plugin-css-string.mjs';
 
 const srcDir = './src/vanilla';
 const componentsDir = join(srcDir, 'components');
@@ -17,30 +17,6 @@ const getComponents = () => {
 };
 
 const components = getComponents();
-
-// Plugin to inline CSS as a string
-const inlineCssPlugin = () => ({
-  name: 'inline-css',
-  resolveId(source) {
-    if (source.endsWith('?inline-css')) {
-      return source;
-    }
-    return null;
-  },
-  load(id) {
-    if (id.endsWith('?inline-css')) {
-      const cssPath = id.replace('?inline-css', '');
-      try {
-        const css = readFileSync(cssPath, 'utf-8');
-        return `export default ${JSON.stringify(css)};`;
-      } catch (err) {
-        console.warn(`Could not load CSS file: ${cssPath}`);
-        return `export default '';`;
-      }
-    }
-    return null;
-  }
-});
 
 const configs = [
   // Main bundle (all components)
@@ -62,9 +38,10 @@ const configs = [
       }
     ],
     plugins: [
+      cssString(), // Must come before nodeResolve
       nodeResolve({
         preferBuiltins: false,
-        extensions: ['.ts', '.js']
+        extensions: ['.ts', '.js', '.css']
       }),
       commonjs(),
       typescript({
@@ -74,12 +51,6 @@ const configs = [
         outDir: 'dist/vanilla',
         rootDir: 'src',
         exclude: ['**/*.test.ts', '**/*.spec.ts', 'src/components/**/*']
-      }),
-      inlineCssPlugin(),
-      postcss({
-        extract: 'apps-sdk-ui.css',
-        minimize: true,
-        sourceMap: true
       })
     ],
     external: [],
@@ -103,9 +74,10 @@ components.forEach(component => {
         exports: 'named'
       },
       plugins: [
+        cssString(),
         nodeResolve({
           preferBuiltins: false,
-          extensions: ['.ts', '.js']
+          extensions: ['.ts', '.js', '.css']
         }),
         commonjs(),
         typescript({
@@ -133,9 +105,10 @@ components.forEach(component => {
         exports: 'named'
       },
       plugins: [
+        cssString(),
         nodeResolve({
           preferBuiltins: false,
-          extensions: ['.ts', '.js']
+          extensions: ['.ts', '.js', '.css']
         }),
         commonjs(),
         typescript({

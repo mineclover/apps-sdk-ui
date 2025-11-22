@@ -1,0 +1,233 @@
+/**
+ * Vanilla Web Components - Base Styles
+ * This CSS will be bundled as a string and injected via adoptedStyleSheets
+ */
+
+/* Tailwind directives */
+@import "tailwindcss";
+
+/* Basic resets for shadow DOM */
+:host {
+  box-sizing: border-box;
+}
+
+:host *,
+:host *::before,
+:host *::after {
+  box-sizing: inherit;
+}
+
+/* Common utility classes we need */
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.gap-2 { gap: 0.5rem; }
+
+/* Button base styles */
+button {
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* Size classes */
+.h-\[22px\] { height: 22px; }
+.h-\[24px\] { height: 24px; }
+.h-\[26px\] { height: 26px; }
+.h-\[28px\] { height: 28px; }
+.h-\[32px\] { height: 32px; }
+.h-\[36px\] { height: 36px; }
+.h-\[40px\] { height: 40px; }
+.h-\[44px\] { height: 44px; }
+.h-\[48px\] { height: 48px; }
+
+/* Padding */
+.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+.px-2\.5 { padding-left: 0.625rem; padding-right: 0.625rem; }
+.px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.px-7 { padding-left: 1.75rem; padding-right: 1.75rem; }
+.px-8 { padding-left: 2rem; padding-right: 2rem; }
+
+/* Border radius */
+.rounded-lg { border-radius: 0.5rem; }
+.rounded-full { border-radius: 9999px; }
+.rounded-xl { border-radius: 0.75rem; }
+
+/* Text */
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-base { font-size: 1rem; line-height: 1.5rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+
+.font-medium { font-weight: 500; }
+
+/* Colors - Primary */
+.bg-blue-600 { background-color: rgb(37, 99, 235); }
+.bg-blue-700 { background-color: rgb(29, 78, 216); }
+.bg-blue-100 { background-color: rgb(219, 234, 254); }
+.bg-blue-200 { background-color: rgb(191, 219, 254); }
+.bg-blue-50 { background-color: rgb(239, 246, 255); }
+.text-blue-600 { color: rgb(37, 99, 235); }
+.text-blue-700 { color: rgb(29, 78, 216); }
+.text-white { color: rgb(255, 255, 255); }
+.border-blue-600 { border-color: rgb(37, 99, 235); }
+
+/* Colors - Gray/Secondary */
+.bg-gray-600 { background-color: rgb(75, 85, 99); }
+.bg-gray-700 { background-color: rgb(55, 65, 81); }
+.bg-gray-100 { background-color: rgb(243, 244, 246); }
+.bg-gray-200 { background-color: rgb(229, 231, 235); }
+.bg-gray-50 { background-color: rgb(249, 250, 251); }
+.text-gray-600 { color: rgb(75, 85, 99); }
+.text-gray-700 { color: rgb(55, 65, 81); }
+.border-gray-600 { border-color: rgb(75, 85, 99); }
+
+/* Colors - Red/Danger */
+.bg-red-600 { background-color: rgb(220, 38, 38); }
+.bg-red-700 { background-color: rgb(185, 28, 28); }
+.bg-red-100 { background-color: rgb(254, 226, 226); }
+.bg-red-200 { background-color: rgb(254, 202, 202); }
+.bg-red-50 { background-color: rgb(254, 242, 242); }
+.text-red-600 { color: rgb(220, 38, 38); }
+.text-red-700 { color: rgb(185, 28, 28); }
+.border-red-600 { border-color: rgb(220, 38, 38); }
+
+/* Colors - Green/Success */
+.bg-green-600 { background-color: rgb(22, 163, 74); }
+.bg-green-700 { background-color: rgb(21, 128, 61); }
+.bg-green-100 { background-color: rgb(220, 252, 231); }
+.bg-green-200 { background-color: rgb(187, 247, 208); }
+.bg-green-50 { background-color: rgb(240, 253, 244); }
+.text-green-600 { color: rgb(22, 163, 74); }
+.text-green-700 { color: rgb(21, 128, 61); }
+.border-green-600 { border-color: rgb(22, 163, 74); }
+
+/* Colors - Cyan/Info */
+.bg-cyan-600 { background-color: rgb(8, 145, 178); }
+.bg-cyan-700 { background-color: rgb(14, 116, 144); }
+.bg-cyan-100 { background-color: rgb(207, 250, 254); }
+.bg-cyan-200 { background-color: rgb(165, 243, 252); }
+.bg-cyan-50 { background-color: rgb(236, 254, 255); }
+.text-cyan-600 { color: rgb(8, 145, 178); }
+.text-cyan-700 { color: rgb(14, 116, 144); }
+.border-cyan-600 { border-color: rgb(8, 145, 178); }
+
+/* Colors - Purple/Discovery */
+.bg-purple-600 { background-color: rgb(147, 51, 234); }
+.bg-purple-700 { background-color: rgb(126, 34, 206); }
+.bg-purple-100 { background-color: rgb(243, 232, 255); }
+.bg-purple-200 { background-color: rgb(233, 213, 255); }
+.bg-purple-50 { background-color: rgb(250, 245, 255); }
+.text-purple-600 { color: rgb(147, 51, 234); }
+.text-purple-700 { color: rgb(126, 34, 206); }
+.border-purple-600 { border-color: rgb(147, 51, 234); }
+
+/* Colors - Yellow/Caution */
+.bg-yellow-600 { background-color: rgb(202, 138, 4); }
+.bg-yellow-700 { background-color: rgb(161, 98, 7); }
+.bg-yellow-100 { background-color: rgb(254, 249, 195); }
+.bg-yellow-200 { background-color: rgb(254, 240, 138); }
+.bg-yellow-50 { background-color: rgb(254, 252, 232); }
+.text-yellow-600 { color: rgb(202, 138, 4); }
+.text-yellow-700 { color: rgb(161, 98, 7); }
+.border-yellow-600 { border-color: rgb(202, 138, 4); }
+
+/* Colors - Orange/Warning */
+.bg-orange-600 { background-color: rgb(234, 88, 12); }
+.bg-orange-700 { background-color: rgb(194, 65, 12); }
+.bg-orange-100 { background-color: rgb(255, 237, 213); }
+.bg-orange-200 { background-color: rgb(254, 215, 170); }
+.bg-orange-50 { background-color: rgb(255, 247, 237); }
+.text-orange-600 { color: rgb(234, 88, 12); }
+.text-orange-700 { color: rgb(194, 65, 12); }
+.border-orange-600 { border-color: rgb(234, 88, 12); }
+
+/* Borders */
+.border { border-width: 1px; border-style: solid; }
+
+/* Transitions */
+.transition-colors {
+  transition-property: color, background-color, border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Hover states */
+.hover\:bg-blue-700:hover { background-color: rgb(29, 78, 216); }
+.hover\:bg-blue-200:hover { background-color: rgb(191, 219, 254); }
+.hover\:bg-blue-50:hover { background-color: rgb(239, 246, 255); }
+
+.hover\:bg-gray-700:hover { background-color: rgb(55, 65, 81); }
+.hover\:bg-gray-200:hover { background-color: rgb(229, 231, 235); }
+.hover\:bg-gray-50:hover { background-color: rgb(249, 250, 251); }
+
+.hover\:bg-red-700:hover { background-color: rgb(185, 28, 28); }
+.hover\:bg-red-200:hover { background-color: rgb(254, 202, 202); }
+.hover\:bg-red-50:hover { background-color: rgb(254, 242, 242); }
+
+.hover\:bg-green-700:hover { background-color: rgb(21, 128, 61); }
+.hover\:bg-green-200:hover { background-color: rgb(187, 247, 208); }
+.hover\:bg-green-50:hover { background-color: rgb(240, 253, 244); }
+
+.hover\:bg-cyan-700:hover { background-color: rgb(14, 116, 144); }
+.hover\:bg-cyan-200:hover { background-color: rgb(165, 243, 252); }
+.hover\:bg-cyan-50:hover { background-color: rgb(236, 254, 255); }
+
+.hover\:bg-purple-700:hover { background-color: rgb(126, 34, 206); }
+.hover\:bg-purple-200:hover { background-color: rgb(233, 213, 255); }
+.hover\:bg-purple-50:hover { background-color: rgb(250, 245, 255); }
+
+.hover\:bg-yellow-700:hover { background-color: rgb(161, 98, 7); }
+.hover\:bg-yellow-200:hover { background-color: rgb(254, 240, 138); }
+.hover\:bg-yellow-50:hover { background-color: rgb(254, 252, 232); }
+
+.hover\:bg-orange-700:hover { background-color: rgb(194, 65, 12); }
+.hover\:bg-orange-200:hover { background-color: rgb(254, 215, 170); }
+.hover\:bg-orange-50:hover { background-color: rgb(255, 247, 237); }
+
+/* Focus states */
+.focus-visible\:outline-none:focus-visible { outline: 2px solid transparent; outline-offset: 2px; }
+.focus-visible\:ring-2:focus-visible { box-shadow: 0 0 0 2px currentColor; }
+.focus-visible\:ring-offset-2:focus-visible { box-shadow: 0 0 0 2px white, 0 0 0 4px currentColor; }
+
+/* Disabled states */
+.disabled\:pointer-events-none:disabled { pointer-events: none; }
+.disabled\:opacity-50:disabled { opacity: 0.5; }
+
+/* Width */
+.w-full { width: 100%; }
+.aspect-square { aspect-ratio: 1 / 1; }
+
+/* Position */
+.absolute { position: absolute; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+
+/* Animation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Spinner */
+.h-4 { height: 1rem; }
+.w-4 { width: 1rem; }
+.border-2 { border-width: 2px; }
+.border-current { border-color: currentColor; }
+.border-t-transparent { border-top-color: transparent; }

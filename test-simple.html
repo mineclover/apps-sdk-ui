@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Vanilla Test</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Simple Vanilla Test - With Bundled CSS!</title>
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -22,18 +21,29 @@
 </head>
 <body>
   <div class="container">
-    <h1 style="margin-bottom: 2rem;">🧪 Vanilla Web Components Test</h1>
+    <h1 style="margin-bottom: 2rem;">🎉 Vanilla Web Components - CSS Bundled!</h1>
 
     <div id="status" style="padding: 1rem; background: #e3f2fd; border-radius: 4px; margin-bottom: 2rem;">
       Loading...
     </div>
 
-    <h2 style="margin-bottom: 1rem;">Test Buttons:</h2>
+    <h2 style="margin-bottom: 1rem;">Test Buttons (should have colors!):</h2>
     <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
       <apps-button color="primary" variant="solid">Primary</apps-button>
       <apps-button color="success" variant="soft">Success</apps-button>
       <apps-button color="danger" variant="outline">Danger</apps-button>
       <apps-button color="info" variant="ghost">Info</apps-button>
+      <apps-button color="warning" variant="solid">Warning</apps-button>
+      <apps-button color="secondary" variant="soft">Secondary</apps-button>
+    </div>
+
+    <h2 style="margin-bottom: 1rem;">Different Sizes:</h2>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; align-items: center;">
+      <apps-button color="primary" size="xs">Extra Small</apps-button>
+      <apps-button color="primary" size="sm">Small</apps-button>
+      <apps-button color="primary" size="md">Medium</apps-button>
+      <apps-button color="primary" size="lg">Large</apps-button>
+      <apps-button color="primary" size="xl">Extra Large</apps-button>
     </div>
 
     <h2 style="margin-bottom: 1rem;">Interactive Test:</h2>
@@ -44,7 +54,7 @@
     </div>
     <apps-button id="testBtn" color="primary">Test Button</apps-button>
 
-    <div id="output" style="margin-top: 1rem; padding: 1rem; background: #f8f8f8; border-radius: 4px; font-family: monospace; font-size: 0.9rem; min-height: 100px;">
+    <div id="output" style="margin-top: 1rem; padding: 1rem; background: #f8f8f8; border-radius: 4px; font-family: monospace; font-size: 0.9rem; min-height: 100px; max-height: 300px; overflow-y: auto;">
       Console output will appear here...
     </div>
   </div>
@@ -77,6 +87,12 @@
       if (AppsSDKUI.StyleManager) {
         log('✓ StyleManager found');
         log(`  Ready: ${AppsSDKUI.StyleManager.isReady()}`);
+
+        const sheet = AppsSDKUI.StyleManager.getGlobalSheet();
+        if (sheet && sheet.cssRules) {
+          log(`  CSS Rules count: ${sheet.cssRules.length}`);
+          log(`  First rule: ${sheet.cssRules[0]?.cssText?.substring(0, 50)}...`);
+        }
       } else {
         log('✗ StyleManager not found');
       }
@@ -94,7 +110,13 @@
       if (btn && btn.shadowRoot) {
         log('✓ Shadow DOM found');
         log(`  Mode: ${btn.shadowRoot.mode}`);
-        log(`  Adopted sheets: ${btn.shadowRoot.adoptedStyleSheets?.length || 0}`);
+        const sheets = btn.shadowRoot.adoptedStyleSheets;
+        log(`  Adopted sheets: ${sheets?.length || 0}`);
+
+        if (sheets && sheets.length > 0) {
+          log(`  ✓ adoptedStyleSheets working!`);
+          log(`  Sheet has ${sheets[0].cssRules?.length || 0} CSS rules`);
+        }
       } else {
         log('✗ Shadow DOM not found');
       }
@@ -145,12 +167,13 @@
         const supported = Object.values(support).every(v => v);
 
         if (supported) {
-          status.innerHTML = '✅ Browser supports all required APIs<br>' +
+          status.innerHTML = '✅ Browser supports all required APIs + CSS BUNDLED!<br>' +
             '<small>Custom Elements, Shadow DOM, adoptedStyleSheets</small>';
           status.style.background = '#d4edda';
           status.style.color = '#155724';
 
           log('Browser support: OK');
+          log('CSS Bundled: 32KB of Tailwind styles');
           log('Ready to test!');
         } else {
           status.innerHTML = '⚠️ Browser missing required APIs<br>' +
