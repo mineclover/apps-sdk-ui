@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Components Test - Vanilla Web Components</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+      background: #f5f5f5;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section {
+      background: white;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin-top: 0;
+    }
+    h2 {
+      border-bottom: 2px solid #e5e5e5;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .demo-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .demo-col {
+      flex: 1;
+      min-width: 200px;
+    }
+    code {
+      background: #f0f0f0;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 0.9em;
+    }
+    .status {
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 2rem;
+      background: #d4edda;
+      color: #155724;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 All Components - Vanilla Web Components Test</h1>
+
+  <div class="status">
+    ✅ Bundle Size: 88KB (includes Button, Badge, Input, Checkbox, Switch + 32KB CSS)<br>
+    📦 Zero dependencies | 🎯 1:1 React component parity
+  </div>
+
+  <!-- Button Component -->
+  <div class="section">
+    <h2>Button Component</h2>
+
+    <h3>Variants</h3>
+    <div class="demo-row">
+      <apps-button color="primary" variant="solid">Solid</apps-button>
+      <apps-button color="primary" variant="soft">Soft</apps-button>
+      <apps-button color="primary" variant="outline">Outline</apps-button>
+      <apps-button color="primary" variant="ghost">Ghost</apps-button>
+    </div>
+
+    <h3>Colors</h3>
+    <div class="demo-row">
+      <apps-button color="primary">Primary</apps-button>
+      <apps-button color="secondary">Secondary</apps-button>
+      <apps-button color="success">Success</apps-button>
+      <apps-button color="danger">Danger</apps-button>
+      <apps-button color="warning">Warning</apps-button>
+      <apps-button color="info">Info</apps-button>
+    </div>
+
+    <h3>Sizes</h3>
+    <div class="demo-row">
+      <apps-button size="xs">XS</apps-button>
+      <apps-button size="sm">SM</apps-button>
+      <apps-button size="md">MD</apps-button>
+      <apps-button size="lg">LG</apps-button>
+      <apps-button size="xl">XL</apps-button>
+    </div>
+
+    <h3>States</h3>
+    <div class="demo-row">
+      <apps-button>Normal</apps-button>
+      <apps-button disabled>Disabled</apps-button>
+      <apps-button loading>Loading</apps-button>
+      <apps-button pill>Pill</apps-button>
+    </div>
+  </div>
+
+  <!-- Badge Component -->
+  <div class="section">
+    <h2>Badge Component</h2>
+
+    <h3>Variants</h3>
+    <div class="demo-row">
+      <apps-badge variant="solid" color="success">Solid</apps-badge>
+      <apps-badge variant="soft" color="success">Soft</apps-badge>
+      <apps-badge variant="outline" color="success">Outline</apps-badge>
+    </div>
+
+    <h3>Colors</h3>
+    <div class="demo-row">
+      <apps-badge color="secondary">Secondary</apps-badge>
+      <apps-badge color="success">Success</apps-badge>
+      <apps-badge color="danger">Danger</apps-badge>
+      <apps-badge color="warning">Warning</apps-badge>
+      <apps-badge color="info">Info</apps-badge>
+      <apps-badge color="discovery">Discovery</apps-badge>
+    </div>
+
+    <h3>Sizes</h3>
+    <div class="demo-row">
+      <apps-badge size="sm">Small</apps-badge>
+      <apps-badge size="md">Medium</apps-badge>
+      <apps-badge size="lg">Large</apps-badge>
+    </div>
+
+    <h3>Pill Shape</h3>
+    <div class="demo-row">
+      <apps-badge pill>Pill Badge</apps-badge>
+      <apps-badge pill color="success">New</apps-badge>
+      <apps-badge pill color="danger">Hot</apps-badge>
+    </div>
+  </div>
+
+  <!-- Input Component -->
+  <div class="section">
+    <h2>Input Component</h2>
+
+    <h3>Variants</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <label style="display: block; margin-bottom: 0.5rem;">Outline (default)</label>
+        <apps-input variant="outline" placeholder="Enter text..." style="width: 100%;"></apps-input>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <label style="display: block; margin-bottom: 0.5rem;">Soft</label>
+        <apps-input variant="soft" placeholder="Enter text..." style="width: 100%;"></apps-input>
+      </div>
+    </div>
+
+    <h3>Sizes</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <apps-input size="sm" placeholder="Small" style="width: 100%;"></apps-input>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-input size="md" placeholder="Medium (default)" style="width: 100%;"></apps-input>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-input size="lg" placeholder="Large" style="width: 100%;"></apps-input>
+      </div>
+    </div>
+
+    <h3>States</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <apps-input placeholder="Normal input" style="width: 100%;"></apps-input>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-input disabled placeholder="Disabled" style="width: 100%;"></apps-input>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-input invalid placeholder="Invalid input" style="width: 100%;"></apps-input>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-input pill placeholder="Pill shaped" style="width: 100%;"></apps-input>
+      </div>
+    </div>
+
+    <h3>Types</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <apps-input type="text" placeholder="Text input" style="width: 100%;"></apps-input>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-input type="email" placeholder="email@example.com" style="width: 100%;"></apps-input>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-input type="password" placeholder="Password" style="width: 100%;"></apps-input>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-input type="number" placeholder="Number" style="width: 100%;"></apps-input>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkbox Component -->
+  <div class="section">
+    <h2>Checkbox Component</h2>
+
+    <h3>Basic Usage</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <apps-checkbox id="cb1"></apps-checkbox>
+        <label for="cb1" style="margin-left: 0.5rem;">Checkbox without label</label>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-checkbox label="Checkbox with label"></apps-checkbox>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-checkbox label="Checked checkbox" checked></apps-checkbox>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-checkbox label="Indeterminate checkbox" checked="indeterminate"></apps-checkbox>
+      </div>
+    </div>
+
+    <h3>States</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <apps-checkbox label="Normal checkbox"></apps-checkbox>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-checkbox label="Disabled checkbox" disabled></apps-checkbox>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-checkbox label="Disabled checked" disabled checked></apps-checkbox>
+      </div>
+    </div>
+
+    <h3>Orientation</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <apps-checkbox label="Left (default)" orientation="left"></apps-checkbox>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-checkbox label="Right" orientation="right"></apps-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <!-- Switch Component -->
+  <div class="section">
+    <h2>Switch Component</h2>
+
+    <h3>Basic Usage</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <apps-switch></apps-switch>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-switch label="Switch with label"></apps-switch>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-switch label="Checked switch" checked></apps-switch>
+      </div>
+    </div>
+
+    <h3>States</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <apps-switch label="Normal switch"></apps-switch>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-switch label="Disabled switch" disabled></apps-switch>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-switch label="Disabled checked" disabled checked></apps-switch>
+      </div>
+    </div>
+
+    <h3>Label Position</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <apps-switch label="End (default)" label-position="end"></apps-switch>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-switch label="Start" label-position="start"></apps-switch>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Demo -->
+  <div class="section">
+    <h2>Interactive Demo</h2>
+    <p>Try interacting with the components:</p>
+
+    <div style="margin-bottom: 2rem;">
+      <apps-input id="nameInput" placeholder="Enter your name" style="width: 300px;"></apps-input>
+      <apps-button id="submitBtn" color="primary" style="margin-left: 1rem;">Submit</apps-button>
+    </div>
+
+    <div style="margin-bottom: 1rem;">
+      <apps-checkbox id="agreeCheck" label="I agree to the terms"></apps-checkbox>
+    </div>
+
+    <div style="margin-bottom: 1rem;">
+      <apps-switch id="notifySwitch" label="Enable notifications"></apps-switch>
+    </div>
+
+    <div id="output" style="padding: 1rem; background: #f8f8f8; border-radius: 4px; min-height: 100px; font-family: monospace; font-size: 0.9rem;">
+      Output will appear here...
+    </div>
+  </div>
+
+  <script src="dist/vanilla/apps-sdk-ui.js"></script>
+
+  <script>
+    // Interactive demo
+    const output = document.getElementById('output');
+
+    function log(msg) {
+      const time = new Date().toLocaleTimeString();
+      output.innerHTML += `[${time}] ${msg}<br>`;
+    }
+
+    // Input event
+    const nameInput = document.getElementById('nameInput');
+    nameInput.addEventListener('apps-input', (e) => {
+      log(`Input value: "${e.detail.value}"`);
+    });
+
+    // Button click
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.addEventListener('apps-click', () => {
+      const name = nameInput.value;
+      log(`Submit clicked! Name: "${name}"`);
+      if (!name) {
+        nameInput.invalid = true;
+      } else {
+        nameInput.invalid = false;
+      }
+    });
+
+    // Checkbox change
+    const agreeCheck = document.getElementById('agreeCheck');
+    agreeCheck.addEventListener('apps-change', (e) => {
+      log(`Checkbox changed: ${e.detail.checked}`);
+      submitBtn.disabled = !e.detail.checked;
+    });
+
+    // Switch change
+    const notifySwitch = document.getElementById('notifySwitch');
+    notifySwitch.addEventListener('apps-change', (e) => {
+      log(`Notifications: ${e.detail.checked ? 'Enabled' : 'Disabled'}`);
+    });
+
+    log('Interactive demo ready! Try the controls above.');
+  </script>
+</body>
+</html>

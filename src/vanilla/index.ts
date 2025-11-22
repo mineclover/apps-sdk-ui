@@ -15,6 +15,10 @@ export * from "./core/types";
 
 // Import and register components
 export { AppsButton } from "./components/button";
+export { AppsBadge } from "./components/badge";
+export { AppsInput } from "./components/input";
+export { AppsCheckbox } from "./components/checkbox";
+export { AppsSwitch } from "./components/switch";
 
 /**
  * Initialize the library
