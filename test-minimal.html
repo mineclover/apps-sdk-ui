@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimal Test</title>
+</head>
+<body>
+  <h1>Minimal Web Components Test</h1>
+
+  <apps-button color="primary">Test Button</apps-button>
+  <apps-badge color="success">Test Badge</apps-badge>
+
+  <script src="/dist/vanilla/apps-sdk-ui.js"></script>
+
+  <script>
+    console.log('Script loaded');
+    console.log('Button defined:', customElements.get('apps-button'));
+    console.log('Badge defined:', customElements.get('apps-badge'));
+
+    // Log any errors
+    window.addEventListener('error', (e) => {
+      console.error('Error:', e.message, e.filename, e.lineno, e.colno);
+    });
+
+    // Check after DOM loaded
+    setTimeout(() => {
+      console.log('Elements in DOM:', {
+        buttons: document.querySelectorAll('apps-button').length,
+        badges: document.querySelectorAll('apps-badge').length
+      });
+    }, 1000);
+  </script>
+</body>
+</html>
