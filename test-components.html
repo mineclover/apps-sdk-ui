@@ -206,6 +206,57 @@
     </div>
   </div>
 
+  <!-- Textarea Component -->
+  <div class="section">
+    <h2>Textarea Component</h2>
+
+    <h3>Variants</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <label style="display: block; margin-bottom: 0.5rem;">Outline (default)</label>
+        <apps-textarea variant="outline" placeholder="Enter multiple lines..." style="width: 100%;"></apps-textarea>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <label style="display: block; margin-bottom: 0.5rem;">Soft</label>
+        <apps-textarea variant="soft" placeholder="Enter multiple lines..." style="width: 100%;"></apps-textarea>
+      </div>
+    </div>
+
+    <h3>Sizes</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <apps-textarea size="sm" placeholder="Small" rows="2" style="width: 100%;"></apps-textarea>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-textarea size="md" placeholder="Medium (default)" rows="3" style="width: 100%;"></apps-textarea>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-textarea size="lg" placeholder="Large" rows="4" style="width: 100%;"></apps-textarea>
+      </div>
+    </div>
+
+    <h3>States</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <apps-textarea placeholder="Normal textarea" style="width: 100%;"></apps-textarea>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-textarea disabled placeholder="Disabled" style="width: 100%;"></apps-textarea>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <apps-textarea invalid placeholder="Invalid textarea" style="width: 100%;"></apps-textarea>
+      </div>
+    </div>
+
+    <h3>Auto-resize</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <label style="display: block; margin-bottom: 0.5rem;">Auto-resize (grows with content)</label>
+        <apps-textarea auto-resize rows="3" max-rows="10" placeholder="Type multiple lines and watch it grow..." style="width: 100%;"></apps-textarea>
+      </div>
+    </div>
+  </div>
+
   <!-- Checkbox Component -->
   <div class="section">
     <h2>Checkbox Component</h2>
