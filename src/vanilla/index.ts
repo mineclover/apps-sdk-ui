@@ -20,6 +20,7 @@ export { AppsInput } from "./components/input";
 export { AppsCheckbox } from "./components/checkbox";
 export { AppsSwitch } from "./components/switch";
 export { AppsTextarea } from "./components/textarea";
+export { AppsRadio } from "./components/radio-group";
 
 /**
  * Initialize the library

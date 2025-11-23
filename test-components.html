@@ -257,6 +257,63 @@
     </div>
   </div>
 
+  <!-- Radio Component -->
+  <div class="section">
+    <h2>Radio Component</h2>
+
+    <h3>Basic Usage</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <h4 style="margin-bottom: 0.5rem;">Choose an option:</h4>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <apps-radio name="group1" value="option1" label="Option 1"></apps-radio>
+          <apps-radio name="group1" value="option2" label="Option 2" checked></apps-radio>
+          <apps-radio name="group1" value="option3" label="Option 3"></apps-radio>
+        </div>
+      </div>
+    </div>
+
+    <h3>Horizontal Layout</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <h4 style="margin-bottom: 0.5rem;">Select size:</h4>
+        <div style="display: flex; gap: 1rem;">
+          <apps-radio name="size" value="small" label="Small"></apps-radio>
+          <apps-radio name="size" value="medium" label="Medium" checked></apps-radio>
+          <apps-radio name="size" value="large" label="Large"></apps-radio>
+        </div>
+      </div>
+    </div>
+
+    <h3>States</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <h4 style="margin-bottom: 0.5rem;">Normal:</h4>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <apps-radio name="normal" value="1" label="Normal radio"></apps-radio>
+          <apps-radio name="normal" value="2" label="Checked radio" checked></apps-radio>
+        </div>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <h4 style="margin-bottom: 0.5rem;">Disabled:</h4>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <apps-radio name="disabled" value="1" label="Disabled radio" disabled></apps-radio>
+          <apps-radio name="disabled" value="2" label="Disabled checked" disabled checked></apps-radio>
+        </div>
+      </div>
+    </div>
+
+    <h3>Label Position</h3>
+    <div class="demo-col">
+      <div style="margin-bottom: 1rem;">
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <apps-radio name="position" value="1" label="Label on left (default)" orientation="left"></apps-radio>
+          <apps-radio name="position" value="2" label="Label on right" orientation="right"></apps-radio>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Checkbox Component -->
   <div class="section">
     <h2>Checkbox Component</h2>
