@@ -1,10 +1,11 @@
 /**
  * Vanilla Web Components - Base Styles
  * This CSS will be bundled as a string and injected via adoptedStyleSheets
+ *
+ * NOTE: We define only the classes we actually use to keep bundle size small.
+ * Full Tailwind CSS (~34KB) caused browser crashes in adoptedStyleSheets.
+ * All necessary utility classes are defined below.
  */
-
-/* Tailwind directives */
-@import "tailwindcss";
 
 /* Basic resets for shadow DOM */
 :host {
